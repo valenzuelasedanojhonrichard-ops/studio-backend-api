@@ -44,9 +44,16 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 🔹 1. Verificar si viene Bearer token
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
+
             token = authHeader.substring(7);
-            username = jwtUtil.extractUsername(token);
+
+            try {
+                username = jwtUtil.extractUsername(token);
+            } catch (Exception e) {
+                System.out.println("Token expirado o inválido");
+            }
         }
+
 
         // 🔹 2. Validar usuario y que no esté autenticado aún
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

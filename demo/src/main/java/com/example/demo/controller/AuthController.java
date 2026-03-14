@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
 
 
 @RestController
@@ -52,5 +52,9 @@ public class AuthController {
     public ResponseEntity<Void> eliminar(@PathVariable String username){
         service.eliminar(username);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/usuarios")
+    public List<Usuario> listarUsuarios(){
+        return usuarioRepo.findAll();
     }
 }
