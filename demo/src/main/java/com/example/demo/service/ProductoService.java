@@ -19,6 +19,7 @@ public class ProductoService {
     }
 
     public Producto guardar(Producto p) {
+        p.setActivo(true);
         return repository.save(p);
     }
     public void eliminar(Long id){
@@ -36,5 +37,9 @@ public class ProductoService {
         p.setCategoria(nuevo.getCategoria());
 
         return repository.save(p);
+    }
+
+    public List<Producto> buscar(String texto){
+        return repository.buscar(texto);
     }
 }

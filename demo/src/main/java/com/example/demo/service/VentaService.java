@@ -187,4 +187,9 @@ public class VentaService {
         );
     }
 
+    public List<Venta> buscar(String texto){
+        return ventaRepo.buscar(texto);
+    }
+
+
 }

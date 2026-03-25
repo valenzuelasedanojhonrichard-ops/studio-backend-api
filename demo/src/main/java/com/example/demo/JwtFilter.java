@@ -32,6 +32,13 @@ public class JwtFilter extends OncePerRequestFilter {
     private UserDetailsService userDetailsService;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/api/auth");
+    }
+
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain)
@@ -53,6 +60,8 @@ public class JwtFilter extends OncePerRequestFilter {
                 System.out.println("Token expirado o inválido");
             }
         }
+
+
 
 
         // 🔹 2. Validar usuario y que no esté autenticado aún

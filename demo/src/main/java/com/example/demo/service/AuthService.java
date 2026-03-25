@@ -29,7 +29,12 @@ public class AuthService {
 
         String token = jwtUtil.generateToken(user.getUsername());
 
-        return new LoginResponse(token);
+        String rol = user.getRoles()
+                .iterator()
+                .next()
+                .getNombre();
+
+        return new LoginResponse(token,rol);
     }
 
     @Transactional

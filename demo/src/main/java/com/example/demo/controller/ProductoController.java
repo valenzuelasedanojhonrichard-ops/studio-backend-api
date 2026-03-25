@@ -36,5 +36,11 @@ public class ProductoController {
         return service.actualizar(id, p);
     }
 
+    @GetMapping("/buscar")
+    public List<Producto> buscar(@RequestParam String texto){
+        return service.buscar(texto);
+    }
+
+
 
 }

@@ -15,6 +15,8 @@ public class VentaDTO {
         private Long id;
         private LocalDateTime fecha;
         private Double total;
+        private String estado;
+        private String cliente;
 
         private List<DetalleVentaDTO> detalles;
 

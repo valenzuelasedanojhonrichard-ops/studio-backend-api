@@ -48,4 +48,12 @@ public interface VentaRepo extends JpaRepository<Venta, Long> {
             @Param("inicio") LocalDateTime inicio,
             @Param("fin") LocalDateTime fin
     );
+
+    @Query("""
+        SELECT v FROM Venta v
+        JOIN v.cliente c
+        WHERE LOWER(c.nombre) LIKE LOWER(CONCAT('%', :texto, '%'))
+        OR CAST(v.id AS string) LIKE %:texto%""")
+    List<Venta> buscar(@Param("texto") String texto);
+
 }

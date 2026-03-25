@@ -5,6 +5,8 @@ import com.example.demo.entity.Cita;
 import com.example.demo.service.CitaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.EstadoCita;
+
 
 import java.util.List;
 
@@ -50,5 +52,38 @@ public class CitaController {
     public DashboardCitaDTO dashboard(){
         return service.resumenCitas();
     }
+
+    // Buscar citas por cliente
+    @GetMapping("/cliente/{clienteId}")
+    public List<Cita> listarPorCliente(@PathVariable Long clienteId){
+        return service.listarPorCliente(clienteId);
+    }
+
+    // Buscar citas por servicio
+    @GetMapping("/servicio/{servicioId}")
+    public List<Cita> listarPorServicio(@PathVariable Long servicioId){
+        return service.listarPorServicio(servicioId);
+    }
+
+    // Buscar citas por cliente y estado
+    @GetMapping("/cliente/{clienteId}/estado/{estado}")
+    public List<Cita> listarPorClienteYEstado(
+            @PathVariable Long clienteId,
+            @PathVariable EstadoCita estado){
+        return service.listarPorClienteYEstado(clienteId, estado);
+    }
+
+    @GetMapping("/estado/{estado}")
+    public List<Cita> porEstado(@PathVariable EstadoCita estado){
+        return service.listarPorEstado(estado);
+    }
+
+    @GetMapping("/buscar")
+    public List<Cita> buscar(@RequestParam String texto){
+        return service.buscar(texto);
+    }
+
+
+
 }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.example.demo.entity.EstadoVenta;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,5 +29,10 @@ public class Venta {
 
     @Enumerated(EnumType.STRING)
     private EstadoVenta estado = EstadoVenta.ACTIVA;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
 
 }

@@ -14,6 +14,10 @@ public class VentaMapper {
         dto.setId(v.getId());
         dto.setFecha(v.getFecha());
         dto.setTotal(v.getTotal());
+        dto.setEstado(v.getEstado().name());
+        dto.setCliente(v.getCliente().getNombre());
+
+
 
         dto.setDetalles(
                 v.getDetalles()

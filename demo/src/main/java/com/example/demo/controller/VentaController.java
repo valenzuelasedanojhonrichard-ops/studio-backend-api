@@ -80,5 +80,24 @@ public class VentaController {
         return service.obtenerResumen();
     }
 
+    @GetMapping("/filtrar")
+    public List<ReporteVentaDTO> filtrar(
+            @RequestParam LocalDateTime inicio,
+            @RequestParam LocalDateTime fin
+    ){
+        return service.reportePorFechas(inicio, fin)
+                .getVentas();
+    }
+    @GetMapping("/buscar")
+    public List<VentaDTO> buscar(@RequestParam String texto){
+        return service.buscar(texto)
+                .stream()
+                .map(mapper::toDTO)
+                .toList();
+    }
+
+
+
+
 
 }

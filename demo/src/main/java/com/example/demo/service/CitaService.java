@@ -32,6 +32,15 @@ public class CitaService {
             throw new RuntimeException("Duración inválida");
         }
 
+        if(cita.getCliente() == null){
+            throw new RuntimeException("Debe seleccionar cliente");
+        }
+
+        if(cita.getServicio() == null){
+            throw new RuntimeException("Debe seleccionar servicio");
+        }
+
+
         LocalDateTime inicioNueva = cita.getFechaHora();
         LocalDateTime finNueva = inicioNueva.plusMinutes(cita.getDuracionMinutos());
 
@@ -66,13 +75,13 @@ public class CitaService {
 
         Cita c = citaRepo.findById(id).orElseThrow();
 
-        c.setClienteNombre(nueva.getClienteNombre());
+        c.setCliente(nueva.getCliente());
         c.setServicio(nueva.getServicio());
         c.setFechaHora(nueva.getFechaHora());
-        c.setPrecio(nueva.getPrecio());
 
         return citaRepo.save(c);
     }
+
 
     // cancelar
     public Cita cancelar(Long id){
@@ -133,6 +142,26 @@ public class CitaService {
                 canceladas,
                 atendidas
         );
+    }
+
+    public List<Cita> listarPorCliente(Long clienteId){
+        return citaRepo.findByClienteId(clienteId);
+    }
+
+    public List<Cita> listarPorServicio(Long servicioId){
+        return citaRepo.findByServicioId(servicioId);
+    }
+
+    public List<Cita> listarPorClienteYEstado(Long clienteId, EstadoCita estado){
+        return citaRepo.findByClienteIdAndEstado(clienteId, estado);
+    }
+
+    public List<Cita> listarPorEstado(EstadoCita estado){
+        return citaRepo.findByEstado(estado);
+    }
+
+    public List<Cita> buscar(String texto){
+        return citaRepo.buscar(texto);
     }
 
 

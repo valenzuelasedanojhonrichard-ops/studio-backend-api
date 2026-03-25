@@ -45,7 +45,13 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(user.getUsername());
 
-        return new LoginResponse(token);
+        // 🔥 SACAR EL ROL
+        String rol = user.getRoles()
+                .iterator()
+                .next()
+                .getNombre();
+
+        return new LoginResponse(token , rol);
     }
 
     @DeleteMapping("/{username}")
