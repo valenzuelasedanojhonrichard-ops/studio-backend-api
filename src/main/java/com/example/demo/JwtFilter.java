@@ -44,12 +44,18 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain chain)
             throws ServletException, IOException {
 
+        // 🔥 SOLUCIÓN CORS
+        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            chain.doFilter(request, response);
+            return;
+        }
+
         final String authHeader = request.getHeader("Authorization");
 
         String username = null;
         String token = null;
 
-        // 🔹 1. Verificar si viene Bearer token
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
             token = authHeader.substring(7);
@@ -61,16 +67,11 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
-
-
-
-        // 🔹 2. Validar usuario y que no esté autenticado aún
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails =
                     userDetailsService.loadUserByUsername(username);
 
-            // 🔹 3. Validar token
             if (jwtUtil.validateToken(token, userDetails)) {
 
                 UsernamePasswordAuthenticationToken authToken =
@@ -84,7 +85,6 @@ public class JwtFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
 
-                // 🔹 4. Registrar autenticación
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
