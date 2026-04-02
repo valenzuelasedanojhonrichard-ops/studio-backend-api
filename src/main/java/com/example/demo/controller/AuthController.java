@@ -60,8 +60,5 @@ public class AuthController {
         service.eliminar(username);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/usuarios")
-    public List<Usuario> listarUsuarios(){
-        return usuarioRepo.findAll();
-    }
+
 }
