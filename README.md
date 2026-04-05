@@ -99,7 +99,7 @@ Configurar en `application.properties`:
 ```
 spring.datasource.url=jdbc:postgresql://HOST:PORT/postgres
 spring.datasource.username=USER
-spring.datasource.password=PASSWORD
+spring.datasource.password=********
 spring.jpa.hibernate.ddl-auto=update
 ```
 
@@ -136,6 +136,6 @@ Backend desplegado en Railway.
 
 ## 👨‍💻 Autor
 
-Desarrollado por [Tu Nombre]
+Desarrollado por Valenzuela Sedano Jhon Richard.
 
 Proyecto enfocado en práctica profesional de desarrollo fullstack (Angular + Spring Boot).
